@@ -76,6 +76,25 @@ public class connectiondb {
         return name;
     }
 
+    public String getNumber_telephone(String telephone_number) {
+        String number = null;
+        try {
+            conn = getConnection();
+            String query = "SELECT telephone_number FROM users";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                number = rs.getString("telephone_number");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResources();
+        }
+        return number;
+    }
+
     private void closeResources() {
         try {
             if (rs != null) rs.close();
