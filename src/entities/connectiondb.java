@@ -109,6 +109,24 @@ public class connectiondb {
         return number;
     }
 
+    public String getSaldo(String saldo_usuário) {
+        String saldo = null;
+        try {
+            String query = "SELECT balance FROM users";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                saldo = rs.getString("balance");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResultSet();
+        }
+        return saldo;
+    }
+
     private void closeResultSet() {
         try {
             if (rs != null) rs.close();
