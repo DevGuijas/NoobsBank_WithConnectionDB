@@ -13,7 +13,8 @@ public class connectiondb {
         try {
             this.conn = getConnection();
         } catch (SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.printf("Erro de conexão. Verifique a sua internet!");
         }
     }
 
@@ -25,9 +26,9 @@ public class connectiondb {
     }
 
     private static Connection getConnection() throws SQLException {
-        String url = "";
-        String user = "";
-        String password = "";
+        String url = "jdbc:postgresql://autorack.proxy.rlwy.net:11221/railway";
+        String user = "postgres";
+        String password = "tkRKzWKRYgkURICmnDwIakxUSQSlCTKu";
 
         return DriverManager.getConnection(url, user, password);
     }
@@ -125,6 +126,33 @@ public class connectiondb {
             closeResultSet();
         }
         return saldo;
+    }
+
+    /*public String operation_saque(String saque_value) {
+        String finally_operation = null;
+        String balance_value = null;
+        try {
+            String query = "SELECT balance FROM users";
+            PreparedStatement pstmt = conn.prepareStatement(query);
+
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                balance_value = rs.getString("balance");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeResultSet();
+        }
+
+        try {
+            String query = "";
+        }
+        return finally_operation;
+    }*/
+
+    public void invalide_operation() {
+        System.out.println("Infelizmente essa opção ainda não está disponível. Tente novamente mais tarde");
     }
 
     private void closeResultSet() {

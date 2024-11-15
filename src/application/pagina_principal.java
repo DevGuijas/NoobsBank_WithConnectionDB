@@ -33,8 +33,38 @@ public class pagina_principal {
                 String balance = db.getSaldo(saldo_usuário);
 
                 System.out.printf("\nBem vindo(a) novamente, %s!", fullname);
-                System.out.printf("\nSeu telefone é: %s", telephone);
-                System.out.printf("\nO seu saldo é: R$%s", balance);
+
+                int exit_method = 0;
+                while (exit_method != 5) {
+                    System.out.println("\n(1) Consultar informações pessoais." +
+                            "\n(2) Consultar saldo." +
+                            "\n(3) Efetuar deposito." +
+                            "\n(4) Efetuar saque." +
+                            "\n(5) Sair.");
+                    System.out.print("\nA sua escolha:");
+                    int choice = sc.nextInt();
+                    switch (choice) {
+                        case 1:
+                            System.out.println("\nInformações pessoais da conta:");
+                            System.out.println("* Nome completo: " + fullname);
+                            System.out.println("* CPF: " + cpf);
+                            System.out.println("* Número de telefone cadastrado: " + telephone);
+                            break;
+                        case 2:
+                            System.out.println("* Saldo: " + balance);
+                            break;
+                        case 3:
+                            db.invalide_operation();
+                            break;
+                        case 4:
+                            db.invalide_operation();
+                            break;
+                        case 5:
+                            System.out.printf("Entendemos a sua decisão. Até logo! ;)");
+                            exit_method = 5;
+                            break;
+                    }
+                }
             } else {
                 System.out.println("CPF ou chave de autenticação incorretos. Tente novamente.");
             }
@@ -42,5 +72,9 @@ public class pagina_principal {
             // Fecha a conexão quando o aplicativo termina
             db.closeConnection();
         }
+    }
+
+    public void invalide_option() {
+        System.out.printf("Infelizmente essa opção ainda não está disponível. Tente novamente mais tarde");
     }
 }
